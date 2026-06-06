@@ -1,0 +1,3 @@
+#!/bin/sh
+
+mvn -V -B clean package --file pom.xml
