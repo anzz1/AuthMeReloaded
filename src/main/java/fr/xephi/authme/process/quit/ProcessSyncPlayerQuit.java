@@ -4,6 +4,7 @@ import fr.xephi.authme.data.limbo.LimboService;
 import fr.xephi.authme.process.SynchronousProcess;
 import fr.xephi.authme.settings.commandconfig.CommandManager;
 import org.bukkit.entity.Player;
+import org.bukkit.OfflinePlayer;
 
 import javax.inject.Inject;
 
@@ -27,7 +28,7 @@ public class ProcessSyncPlayerQuit implements SynchronousProcess {
             commandManager.runCommandsOnLogout(player);
         } else {
             limboService.restoreData(player);
-            player.saveData(); // #1238: Speed is sometimes not restored properly
+            if (player.getLastPlayed() != 0) player.saveData(); // #1238: Speed is sometimes not restored properly
         }
         player.leaveVehicle();
     }
